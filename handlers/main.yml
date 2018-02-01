@@ -10,3 +10,4 @@
     user: "{{ DEFAULT_USER }}"
     password: "{{ DEFAULT_PASSWD }}"
     status_code: 200
+  tags: tests
