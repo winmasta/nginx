@@ -29,6 +29,9 @@
     state: present
     create: no
 
+- name: Get public IP
+  ipify_facts:
+
 - name: Copy nginx config file
   template:
     src: default.j2
