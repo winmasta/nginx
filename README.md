@@ -29,8 +29,8 @@ Role Variables
 
 **Default username and password, can be changed after deployment with `htpasswd` utility.**
 
-- DEFAULT_USER: admin
-- DEFAULT_PASSWD: admin
+- NGINX_DEFAULT_USER: admin
+- NGINX_DEFAULT_PASSWD: admin
 
 License
 -------

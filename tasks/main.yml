@@ -23,8 +23,8 @@
 
 - name: Create username and password
   htpasswd:
-    name: "{{ DEFAULT_USER }}"
-    password: "{{ DEFAULT_PASSWD }}"
+    name: "{{ NGINX_DEFAULT_USER }}"
+    password: "{{ NGINX_DEFAULT_PASSWD }}"
     path: "{{ PASSWD_FILE }}"
     state: present
     create: no
