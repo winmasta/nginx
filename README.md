@@ -1,38 +1,38 @@
 Role Name
 =========
 
-A brief description of the role goes here.
+Ansible role for nginx service with basic authorization to be in front of WEB UI of services: consul, prometheus,
+grafana, kibana. Tested on:
+ - Ubuntu 14.04 Trusty
+ - Ubuntu 16.04 Xenial
 
 Requirements
 ------------
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+Installed OS:
+ - Ubuntu 14.04 Trusty
+ - Ubuntu 16.04 Xenial
 
 Role Variables
 --------------
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+- PASSWD_FILE: /etc/nginx/.htpasswd # Default password encrypted file
+- NGINX_CONFIG_FILE: /etc/nginx/sites-available/default # Default ngnix site config
 
-Dependencies
-------------
+**All ports are mirrored inside from outside, it can be overwritten after deployment by editing
+`/etc/nginx/sites-available/default`**
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+- CONSUL_PORT: 8500 # Default consul port
+- PROM_PORT: 9090 # Default prometheus port
+- KIBANA_PORT: 5601 # Default kibana port
+- GRAFANA_PORT: 3000 # Default grafana port
 
-Example Playbook
-----------------
+**Default username and password, can be changed after deployment with `htpasswd` utility.**
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
-
-    - hosts: servers
-      roles:
-         - { role: username.rolename, x: 42 }
+- DEFAULT_USER: admin
+- DEFAULT_PASSWD: admin
 
 License
 -------
 
-BSD
-
-Author Information
-------------------
-
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+MIT

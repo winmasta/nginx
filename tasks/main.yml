@@ -1,2 +1,39 @@
 ---
-# tasks file for nginx
+- name: Install required packages
+  apt:
+    name: "{{ item }}"
+    update_cache: yes
+    state: present
+  with_items:
+    - nginx
+    - python-pip
+
+- name: Install passlib Python library
+  pip:
+    name: passlib
+
+- name: Create passwd file
+  copy:
+    content: ""
+    dest: "{{ PASSWD_FILE }}"
+    owner: www-data
+    group: www-data
+    mode: 0400
+    force: no
+
+- name: Create username and password
+  htpasswd:
+    name: "{{ DEFAULT_USER }}"
+    password: "{{ DEFAULT_PASSWD }}"
+    path: "{{ PASSWD_FILE }}"
+    state: present
+    create: no
+
+- name: Get public IP
+  ipify_facts:
+
+- name: Copy nginx config file
+  template:
+    src: default.j2
+    dest: "{{ NGINX_CONFIG_FILE }}"
+  notify: restart nginx
