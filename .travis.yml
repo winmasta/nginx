@@ -29,4 +29,4 @@ script:
   - ansible-playbook -i tests/inventory tests/test.yml --syntax-check
 
   # Run the playbook with ansible-playbook without TLS.
-  - ansible-playbook -i tests/inventory tests/test.yml -vvvvv --skip-tags "tests"
+  - ansible-playbook -i tests/inventory tests/test.yml -vvvvv

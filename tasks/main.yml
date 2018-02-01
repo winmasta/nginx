@@ -36,6 +36,4 @@
   template:
     src: default.j2
     dest: "{{ NGINX_CONFIG_FILE }}"
-  notify:
-    - restart nginx
-    - test
+  notify: restart nginx
