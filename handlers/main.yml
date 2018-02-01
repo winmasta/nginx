@@ -1,2 +1,13 @@
 ---
-# handlers file for nginx
+- name: restart nginx
+  service:
+    name: nginx
+    state: restarted
+
+- name: test
+  uri:
+    url: http://127.0.0.1
+    user: "{{ DEFAULT_USER }}"
+    password: "{{ DEFAULT_PASSWD }}"
+    status_code: 200
+  tags: tests
