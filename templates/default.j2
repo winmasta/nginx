@@ -1,0 +1,58 @@
+# Local server
+server {
+	listen 127.0.0.1:80 default_server;
+	server_name _;
+	auth_basic "Unauthorized";
+  auth_basic_user_file {{ PASSWD_FILE }};
+
+	root /var/www/html;
+	index index.nginx-debian.html;
+}
+
+# Consul
+server {
+  listen {{ ipify_public_ip }}:{{ CONSUL_PORT }};
+  server_name _;
+  auth_basic "Unauthorized";
+  auth_basic_user_file {{ PASSWD_FILE }};
+
+  location / {
+    proxy_pass http://127.0.0.1:{{ CONSUL_PORT }};
+  }
+}
+
+# Prometheus
+server {
+  listen {{ ipify_public_ip }}:{{ PROM_PORT }};
+  server_name _;
+  auth_basic "Unauthorized";
+  auth_basic_user_file {{ PASSWD_FILE }};
+
+  location / {
+    proxy_pass http://127.0.0.1:{{ PROM_PORT }};
+  }
+}
+
+# Grafana
+server {
+  listen {{ ipify_public_ip }}:{{ GRAFANA_PORT }};
+  server_name _;
+  auth_basic "Unauthorized";
+  auth_basic_user_file {{ PASSWD_FILE }};
+
+  location / {
+    proxy_pass http://127.0.0.1:{{ GRAFANA_PORT }};
+  }
+}
+
+# Kibana
+server {
+  listen {{ ipify_public_ip }}:{{ KIBANA_PORT }};
+  server_name _;
+  auth_basic "Unauthorized";
+  auth_basic_user_file {{ PASSWD_FILE }};
+
+  location / {
+    proxy_pass http://127.0.0.1:{{ KIBANA_PORT }};
+  }
+}

@@ -1,0 +1,29 @@
+---
+sudo: required
+dist: trusty
+
+language: python
+python: "2.7"
+
+env:
+  - ANSIBLE_VERSION=latest
+  - ANSIBLE_VERSION=2.3.3.0
+
+branches:
+  only:
+    - master
+
+before_install:
+  - sudo apt-get update -y
+
+install:
+  # Install Ansible.
+  - if [ "$ANSIBLE_VERSION" = "latest" ]; then pip install ansible; else pip install ansible==$ANSIBLE_VERSION; fi
+  - if [ "$ANSIBLE_VERSION" = "latest" ]; then pip install ansible-lint; fi
+
+script:
+  # Check the playbook's syntax.
+  - ansible-playbook -i tests/inventory tests/test.yml --syntax-check
+
+  # Run the playbook with ansible-playbook without TLS.
+  - ansible-playbook -i tests/inventory tests/test.yml -vvvvv
