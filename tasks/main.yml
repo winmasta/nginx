@@ -35,7 +35,7 @@
 
 - name: Choose nginx bind IP address if behind cloud firewall
   block:
-    set_fact: EXT_IP = "{{ ansible_default_ipv4.address }}"
+    set_fact: EXT_IP="{{ ansible_default_ipv4.address }}"
   when: ipify_public_ip != ansible_default_ipv4.address
 
 - name: Copy nginx config file
