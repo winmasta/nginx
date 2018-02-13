@@ -11,7 +11,7 @@ server {
 
 # Consul
 server {
-  listen {{ ipify_public_ip }}:{{ CONSUL_PORT }};
+  listen {{ EXT_IP }}:{{ CONSUL_PORT }};
   server_name _;
   auth_basic "Unauthorized";
   auth_basic_user_file {{ PASSWD_FILE }};
@@ -23,7 +23,7 @@ server {
 
 # Prometheus
 server {
-  listen {{ ipify_public_ip }}:{{ PROM_PORT }};
+  listen {{ EXT_IP }}:{{ PROM_PORT }};
   server_name _;
   auth_basic "Unauthorized";
   auth_basic_user_file {{ PASSWD_FILE }};
@@ -35,7 +35,7 @@ server {
 
 # Grafana
 server {
-  listen {{ ipify_public_ip }}:{{ GRAFANA_PORT }};
+  listen {{ EXT_IP }}:{{ GRAFANA_PORT }};
   server_name _;
   auth_basic "Unauthorized";
   auth_basic_user_file {{ PASSWD_FILE }};
@@ -47,7 +47,7 @@ server {
 
 # Kibana
 server {
-  listen {{ ipify_public_ip }}:{{ KIBANA_PORT }};
+  listen {{ EXT_IP }}:{{ KIBANA_PORT }};
   server_name _;
   auth_basic "Unauthorized";
   auth_basic_user_file {{ PASSWD_FILE }};
